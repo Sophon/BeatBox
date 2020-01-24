@@ -33,7 +33,19 @@ class MainActivity : AppCompatActivity() {
     //=====
 
     private inner class SoundHolder(private val binding: ListItemSoundBinding)
-        : RecyclerView.ViewHolder(binding.root) {}
+        : RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.viewModel = SoundViewModel(beatBox)
+        }
+
+        fun bind(sound: Sound) {
+            binding.apply {
+                viewModel?.sound = sound
+                executePendingBindings()
+            }
+        }
+    }
 
     private inner class SoundAdapter(private val sounds: List<Sound>)
         : RecyclerView.Adapter<SoundHolder>() {
@@ -49,7 +61,9 @@ class MainActivity : AppCompatActivity() {
             return SoundHolder(binding)
         }
 
-        override fun onBindViewHolder(holder: SoundHolder, position: Int) {}
+        override fun onBindViewHolder(holder: SoundHolder, position: Int) {
+            holder.bind(sounds[position])
+        }
 
         override fun getItemCount(): Int = sounds.size
     }
