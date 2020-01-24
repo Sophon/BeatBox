@@ -11,6 +11,8 @@ import com.bignerdranch.android.beatbox.databinding.ListItemSoundBinding
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var beatBox: BeatBox
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -20,8 +22,11 @@ class MainActivity : AppCompatActivity() {
             R.layout.activity_main
         )
 
+        beatBox = BeatBox(assets)
+
         binding.recyclerView.apply {
             layoutManager = GridLayoutManager(context, 3)
+            adapter = SoundAdapter(beatBox.sounds)
         }
     }
 
@@ -46,6 +51,6 @@ class MainActivity : AppCompatActivity() {
 
         override fun onBindViewHolder(holder: SoundHolder, position: Int) {}
 
-        override fun getItemCount(): Int = 0
+        override fun getItemCount(): Int = sounds.size
     }
 }
