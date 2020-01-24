@@ -3,7 +3,7 @@ package com.bignerdranch.android.beatbox
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 
-class SoundViewModel: BaseObservable() {
+class SoundViewModel(beatBox: BeatBox): BaseObservable() {
 
     var sound: Sound? = null
         set(sound) {
