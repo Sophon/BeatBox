@@ -8,6 +8,7 @@ class SoundViewModel: BaseObservable() {
     var sound: Sound? = null
         set(sound) {
             field = sound
+            notifyChange()
         }
 
     @get:Bindable
